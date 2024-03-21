@@ -1,0 +1,30 @@
+﻿@page "/counter"
+@using JectoryLibrary
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current customers count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    protected override void OnInitialized()
+    {
+        Customer customer = new Customer();
+        currentCount = customer.Count();
+        base.OnInitialized();
+    }
+
+    private void IncrementCount()
+    {
+        Customer customer = new Customer();
+        customer.Validate(e => e.Code, currentCount.ToString());
+        customer.Insert();
+        currentCount++;
+    }
+}

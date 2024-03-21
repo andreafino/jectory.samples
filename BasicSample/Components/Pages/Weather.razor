@@ -1,0 +1,48 @@
+﻿@page "/weather"
+@using JectoryLibrary
+@attribute [StreamRendering]
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (Rec == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codice</th>
+                <th>Nome</th>
+                <th>Bloccato</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @do
+            {
+                <tr>
+                    <td>@Rec.Code</td>
+                    <td>@Rec.Name</td>
+                    <td>@Rec.Blocked</td>
+                    <td>@Rec.SystemId</td>
+                </tr>
+            }while(Rec.Next());
+        </tbody>
+    </table>
+}
+
+@code {
+    private Customer Rec;
+
+    protected override void OnInitialized()
+    {
+        Rec = new Customer();
+        Rec.FindSet();
+    }
+}

@@ -1,0 +1,22 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<button @onclick="CreateCustomer">Create Customer</button>
+
+
+@code {
+
+    [Inject]
+    public IHttpContextAccessor contextAccessor { get; set; }
+
+    public void CreateCustomer()
+    {
+        
+    }
+}
