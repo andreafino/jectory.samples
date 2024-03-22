@@ -8,7 +8,7 @@
 
 <p>This component demonstrates showing data.</p>
 
-@if (Rec == null)
+@if (Data == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -24,25 +24,24 @@ else
             </tr>
         </thead>
         <tbody>
-            @do
+            @foreach(Customer customer in Data)
             {
                 <tr>
-                    <td>@Rec.Code</td>
-                    <td>@Rec.Name</td>
-                    <td>@Rec.Blocked</td>
-                    <td>@Rec.SystemId</td>
+                    <td>@customer.Code</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.Blocked</td>
+                    <td>@customer.SystemId</td>
                 </tr>
-            }while(Rec.Next());
+            }
         </tbody>
     </table>
 }
 
 @code {
-    private Customer Rec;
+    private IEnumerable<Customer> Data;
 
     protected override void OnInitialized()
     {
-        Rec = new Customer();
-        Rec.FindSet();
+        Data = Customer.GetFactory().FindSet();
     }
 }
